@@ -6,7 +6,6 @@ module.exports = {
         login(body.username, (err,results)=> {
             if(err)
             {
-                console.log(err)
                 return res.status(500).json({
                     success:0,
                     message:'Something went wrong'
@@ -21,7 +20,7 @@ module.exports = {
                     }
                 )
             }
-            if(body.password == results.ID)
+            if(body.password == results.password)
             {
                 return res.status(200).json({
                     success:1,
