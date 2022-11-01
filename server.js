@@ -6,6 +6,7 @@ const userRouter = require('./api/users/user.router')
 
 app.use(express.json())
 app.use('/api/login',userRouter)
+app.use('/api/updateUser',userRouter)
 
 app.listen(process.env.APP_PORT,()=>{
     console.log('server is running on ', process.env.APP_PORT)
