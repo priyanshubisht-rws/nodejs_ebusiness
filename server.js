@@ -1,10 +1,14 @@
-require('dotenv').config()
+require('dotenv').config();
+const cors = require('cors');
 const express= require('express')
 const app = express()
 
 const userRouter = require('./api/users/user.router')
 
-app.use(express.json())
+app.use(express.json());
+app.use(cors({
+    origin: '*'
+}));
 app.use('/api/login',userRouter)
 app.use('/api/updateUser',userRouter)
 app.use('/api/getUser',userRouter)
