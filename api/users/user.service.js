@@ -14,7 +14,8 @@ module.exports = {
         })   
     },
     updateProfile:(data,callback) => {
-        pool.query(`update dbcp_bc_entries set bc_mobile = ?, bc_mobile_2=?, bc_landline=?, bc_linkedin=?, bc_twitter=?, bc_instagram=?, bc_office_address_type=?, template_style=? where emp_id=?`,
+        pool.query(`update dbcp_bc_entries set bc_mobile = ?, bc_mobile_2=?, bc_landline=?, bc_linkedin=?, bc_twitter=?, bc_instagram=?, bc_office_address_type=?, 
+        template_style=?, bc_name=?, bc_email=?, bc_designation=?, bc_status=?, bc_added_on_date=? where emp_id=?`,
         [
             data.bc_mobile,
             data.bc_mobile_2,
@@ -24,6 +25,11 @@ module.exports = {
             data.bc_instagram,
             data.bc_office_address_type,
             data.template_style,
+            data.bc_name,
+            data.bc_email,
+            data.bc_designation,
+            data.bc_status,
+            data.bc_added_on_date,
             data.emp_id,
         ], (error, results) => {
             if(error)
@@ -34,10 +40,15 @@ module.exports = {
         })   
     },
     addProfile:(data,callback) => {
-       pool.query(`insert into dbcp_bc_entries (emp_id,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
-        VALUES (?,?,?,?,?,?,?,?,?)`,
+       pool.query(`insert into dbcp_bc_entries (emp_id,bc_name,bc_email,bc_designation,bc_status,bc_added_on_date,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [
             data.emp_id,
+            data.bc_name,
+            data.bc_email,
+            data.bc_designation,
+            data.bc_status,
+            data.bc_added_on_date,
             data.bc_mobile,
             data.bc_mobile_2,
             data.bc_landline,
