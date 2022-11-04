@@ -14,8 +14,9 @@ module.exports = {
         })   
     },
     updateProfile:(data,callback) => {
+        console.log(data);
         pool.query(`update dbcp_bc_entries set bc_mobile = ?, bc_mobile_2=?, bc_landline=?, bc_linkedin=?, bc_twitter=?, bc_instagram=?, bc_office_address_type=?, 
-        template_style=?, bc_name=?, bc_email=?, bc_designation=?, bc_status=?, bc_added_on_date=? where emp_id=?`,
+        template_style=?, bc_name=?, bc_email=?, bc_designation=?, bc_status=?, bc_picture=?,bc_qr_image=?, bc_added_on_date=?, bc_added_on_datetime=? where emp_id=?`,
         [
             data.bc_mobile,
             data.bc_mobile_2,
@@ -29,7 +30,10 @@ module.exports = {
             data.bc_email,
             data.bc_designation,
             data.bc_status,
+            data.bc_picture,
+            data.bc_qr_image,
             data.bc_added_on_date,
+            data.bc_added_on_datetime,
             data.emp_id,
         ], (error, results) => {
             if(error)
@@ -40,15 +44,18 @@ module.exports = {
         })   
     },
     addProfile:(data,callback) => {
-       pool.query(`insert into dbcp_bc_entries (emp_id,bc_name,bc_email,bc_designation,bc_status,bc_added_on_date,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      var q= pool.query(`insert into dbcp_bc_entries (emp_id,bc_name,bc_email,bc_designation,bc_status,bc_picture,bc_qr_image,bc_added_on_date,bc_added_on_datetime,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [
             data.emp_id,
             data.bc_name,
             data.bc_email,
             data.bc_designation,
             data.bc_status,
+            data.bc_picture,
+            data.bc_qr_image,
             data.bc_added_on_date,
+            data.bc_added_on_datetime,
             data.bc_mobile,
             data.bc_mobile_2,
             data.bc_landline,
@@ -58,6 +65,7 @@ module.exports = {
             data.bc_office_address_type,
             data.template_style,
         ], (error, results) => {
+            console.log(q.sql)
             if(error)
             {
                 callback(error)

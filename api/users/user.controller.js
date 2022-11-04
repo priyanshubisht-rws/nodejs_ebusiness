@@ -1,7 +1,9 @@
 const {login,updateProfile,getUserById,addProfile} = require('./user.service')
+const {storage} = require('../../middlewares/image-middleware')
 const {} = require("jsonwebtoken")
+
 module.exports = {
-    loginUser: (req,res) => {
+    loginUser: async (req,res) => {
         const body =req.body;
         login(body.username, (err,results)=> {
             if(err)
@@ -38,59 +40,61 @@ module.exports = {
             
         })
     },
-    updateUser: (req,res) => {
-        const body =req.body;
-        getUserById(body.emp_id, (err,results) =>
-        {
-            if(err)
+    updateUser:(req,res) => {
+        var body=null
+        storage(req,(results) => {
+            body=results;
+            getUserById(body.emp_id, (err,results) =>
             {
-                return res.status(500).json({
-                    success:0,
-                    message:'Something went wrong'
-                })
-            } 
-            else
-            {
-                if(!results)
+                if(err)
                 {
-                    addProfile(body, (err,results)=> {
-                        if(err)
-                        {
-                            return res.status(500).json({
-                                success:0,
-                                message:'Something went wrong'
-                            })
-                        }
-                        return res.status(200).json({
-                                success:1,
-                                message:"Data Added Successfully",
-                             });
-                        
-                        
+                    return res.status(500).json({
+                        success:0,
+                        message:'Something went wrong'
                     })
-                }
+                } 
                 else
                 {
-                    updateProfile(body, (err,results)=> {
-                        if(err)
-                        {
-                            return res.status(500).json({
-                                success:0,
-                                message:'Something went wrong'
-                            })
-                        }
-                        return res.status(200).json({
-                                success:1,
-                                message:"Updated Successfully",
-                             });
-                        
-                        
-                    })
-
+                    if(!results)
+                    {
+                        addProfile(body, (err,results)=> {
+                            if(err)
+                            {
+                                return res.status(500).json({
+                                    success:0,
+                                    message:'Something went wrong'
+                                })
+                            }
+                            return res.status(200).json({
+                                    success:1,
+                                    message:"Data Added Successfully",
+                                 });
+                            
+                            
+                        })
+                    }
+                    else
+                    {
+                        updateProfile(body, (err,results)=> {
+                            if(err)
+                            {
+                                return res.status(500).json({
+                                    success:0,
+                                    message:'Something went wrong'
+                                })
+                            }
+                            return res.status(200).json({
+                                    success:1,
+                                    message:"Updated Successfully",
+                                 });
+                            
+                            
+                        })
+    
+                    }
                 }
-            }
-        })
-        
+            })
+        });
     },
     getUser: (req,res) => {
         const emp_id =req.params.id;
