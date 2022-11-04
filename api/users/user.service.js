@@ -14,7 +14,6 @@ module.exports = {
         })   
     },
     updateProfile:(data,callback) => {
-        console.log(data);
         pool.query(`update dbcp_bc_entries set bc_mobile = ?, bc_mobile_2=?, bc_landline=?, bc_linkedin=?, bc_twitter=?, bc_instagram=?, bc_office_address_type=?, 
         template_style=?, bc_name=?, bc_email=?, bc_designation=?, bc_status=?, bc_picture=?,bc_qr_image=?, bc_added_on_date=?, bc_added_on_datetime=? where emp_id=?`,
         [

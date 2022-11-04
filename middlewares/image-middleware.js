@@ -37,16 +37,7 @@ module.exports = {
                
             }
 
-            if(files.bc_qr_image[0]['originalFilename']=="")
-            {
-                fs.unlinkSync(files.bc_qr_image[0]['path']);
-               
-            }
-            else
-            {
-                bc_qr_image=files.bc_qr_image[0]['path']
-                
-            }
+            bc_qr_image=fields.bc_qr_image[0];
             bc_mobile=fields.bc_mobile[0];
             bc_mobile2=fields.bc_mobile2[0];
             bc_landline=fields.bc_landline[0];
