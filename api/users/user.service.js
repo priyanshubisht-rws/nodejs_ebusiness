@@ -43,7 +43,7 @@ module.exports = {
         })   
     },
     addProfile:(data,callback) => {
-      var q= pool.query(`insert into dbcp_bc_entries (emp_id,bc_name,bc_email,bc_designation,bc_status,bc_picture,bc_qr_image,bc_added_on_date,bc_added_on_datetime,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
+      pool.query(`insert into dbcp_bc_entries (emp_id,bc_name,bc_email,bc_designation,bc_status,bc_picture,bc_qr_image,bc_added_on_date,bc_added_on_datetime,bc_mobile,bc_mobile_2,bc_landline,bc_linkedin,bc_twitter,bc_instagram,bc_office_address_type,template_style) 
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [
             data.emp_id,
@@ -64,7 +64,7 @@ module.exports = {
             data.bc_office_address_type,
             data.template_style,
         ], (error, results) => {
-            console.log(q.sql)
+           
             if(error)
             {
                 callback(error)

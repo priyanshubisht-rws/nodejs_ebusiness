@@ -22,10 +22,7 @@ module.exports = {
         
         const form = new multiparty.Form({uploadDir: IMAGE_UPLOAD_DIR})
         form.parse(req, async function(err, fields, files){
-            if(err) return res.status(500).json({
-                success:0,
-                message:'Something went wrong'
-            })
+            if(err) callback(err)
             if(files.bc_picture[0]['originalFilename']=="")
             {
                 fs.unlinkSync(files.bc_picture[0]['path']);

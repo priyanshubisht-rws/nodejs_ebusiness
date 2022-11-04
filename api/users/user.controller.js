@@ -42,7 +42,14 @@ module.exports = {
     },
     updateUser:(req,res) => {
         var body=null
-        storage(req,(results) => {
+        storage(req,(err,results) => {
+            if(err)
+            {
+                return res.status(500).json({
+                    success:0,
+                    message:'Something went wrong'
+                })
+            }
             body=results;
             getUserById(body.emp_id, (err,results) =>
             {
