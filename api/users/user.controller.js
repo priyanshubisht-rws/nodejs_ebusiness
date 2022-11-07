@@ -18,7 +18,7 @@ module.exports = {
                 return res.json(
                     {
                         success:0,
-                        data:'Invalid Emp Email'
+                        message:'Invalid Emp Email'
                     }
                 )
             }
@@ -45,6 +45,7 @@ module.exports = {
         storage(req,(err,results) => {
             if(err)
             {
+                console.log(err)
                 return res.status(500).json({
                     success:0,
                     message:'Something went wrong'

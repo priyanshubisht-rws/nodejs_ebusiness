@@ -36,7 +36,7 @@ module.exports = {
 
             bc_qr_image=fields.bc_qr_image[0];
             bc_mobile=fields.bc_mobile[0];
-            bc_mobile2=fields.bc_mobile2[0];
+            bc_mobile2=fields.bc_mobile_2[0];
             bc_landline=fields.bc_landline[0];
             bc_linkedin=fields.bc_linkedin[0];
             bc_twitter=fields.bc_twitter[0];
@@ -69,8 +69,7 @@ module.exports = {
                 'bc_picture':bc_picture,
                 'bc_qr_image':bc_qr_image
             };
-
-            return callback(body);
+            return callback(null,body);
         })
       
 }

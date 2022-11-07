@@ -4,8 +4,8 @@ const pool= require('../../config/database')
 
 module.exports = {
     login:(data,callback) => {
-      var x= pool.query(`select * from employees_data where emp_email = ?`,[data], (error, results) => {
-        console.log(x.sql)
+        pool.query(`select * from employees_data where emp_email = ?`,[data], (error, results) => {
+       // console.log(x.sql)
             if(error)
             {
                 callback(error)
